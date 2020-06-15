@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page import="java.util.Collection" %>
+<%@ page import="ru.job4j.dream.model.Candidate" %>
 <%@ page import="ru.job4j.dream.store.Store" %>
-<%@ page import="ru.job4j.dream.model.Post" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -17,23 +18,38 @@
             integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <title>Работа мечты</title>
 </head>
 <body>
-
-<div class="container">
+<div class="container pt-3">
+    <a class="nav-link" href="<%=request.getContextPath()%>/index.jsp">Главная</a>
     <div class="row">
-        <ul class="nav">
-            <a class="nav-link" href="<%=request.getContextPath()%>/newPost.jsp">Добавить вакансию</a>
-            <a class="nav-link" href="<%=request.getContextPath()%>/candidate.edit.jsp">Добавить резюме</a>
-            <li class="nav-item">
-                <a class="nav-link" href="<%=request.getContextPath()%>/posts.do">Вакансии</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<%=request.getContextPath()%>/candidates.jsp">Кандидаты</a>
-            </li>
-        </ul>
+        <div class="card" style="width: 100%">
+            <div class="card-header">
+                Кандидаты
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Названия</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% for (Candidate candidate : Store
+            .instOf().findAllCandidates()) { %>
+                    <tr>
+                        <td>
+                            <%=candidate.getName()%>
+                        </td>
+                    </tr>
+                    <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 </body>
